@@ -1,0 +1,3 @@
+
+main = asText "Hello, Cordova!"
+
