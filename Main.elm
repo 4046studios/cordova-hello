@@ -2,17 +2,21 @@
 module Main where
 
 import Window (dimensions)
-import Touch (taps)
+import Touch (Touch, touches)
 
-display : (Int,Int) -> { x:Int, y:Int } -> Element
-display (w,h) {x,y} = 
+showTouches : Touch -> Element
+showTouches t = flow down
+  [ asText <| "Touch:"
+  , asText <| "X: " ++ show t.x
+  , asText <| "Y: " ++ show t.y
+  ]
+
+display : (Int,Int) -> [Touch] -> Element
+display (w,h) ts = 
   container w h middle <| 
-  flow down 
-    [ asText "Hello, Elm Cordova"
-    , asText <| "xPos: " ++ show x
-    , asText <| "yPos: " ++ show y
-    ]
+  flow down <|
+  asText "Hello, Elm Cordova" :: map showTouches ts
 
 main : Signal Element
-main = display <~ dimensions ~ taps
+main = display <~ dimensions ~ touches
 

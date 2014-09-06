@@ -29,33 +29,39 @@ Elm.Main.make = function (_elm) {
    var Touch = Elm.Touch.make(_elm);
    var Window = Elm.Window.make(_elm);
    var _op = {};
+   var showTouches = function (t) {
+      return A2(Graphics.Element.flow,
+      Graphics.Element.down,
+      _L.fromArray([Text.asText("Touch:")
+                   ,Text.asText(_L.append("X: ",
+                   String.show(t.x)))
+                   ,Text.asText(_L.append("Y: ",
+                   String.show(t.y)))]));
+   };
    var display = F2(function (_v0,
-   _v1) {
+   ts) {
       return function () {
-         return function () {
-            switch (_v0.ctor)
-            {case "_Tuple2":
-               return A3(Graphics.Element.container,
-                 _v0._0,
-                 _v0._1,
-                 Graphics.Element.middle)(A2(Graphics.Element.flow,
-                 Graphics.Element.down,
-                 _L.fromArray([Text.asText("Hello, Elm Cordova")
-                              ,Text.asText(_L.append("xPos: ",
-                              String.show(_v1.x)))
-                              ,Text.asText(_L.append("yPos: ",
-                              String.show(_v1.y)))])));}
-            _E.Case($moduleName,
-            "between lines 9 and 14");
-         }();
+         switch (_v0.ctor)
+         {case "_Tuple2":
+            return A3(Graphics.Element.container,
+              _v0._0,
+              _v0._1,
+              Graphics.Element.middle)(Graphics.Element.flow(Graphics.Element.down)({ctor: "::"
+                                                                                    ,_0: Text.asText("Hello, Elm Cordova")
+                                                                                    ,_1: A2(List.map,
+                                                                                    showTouches,
+                                                                                    ts)}));}
+         _E.Case($moduleName,
+         "between lines 16 and 18");
       }();
    });
    var main = A2(Signal._op["~"],
    A2(Signal._op["<~"],
    display,
    Window.dimensions),
-   Touch.taps);
+   Touch.touches);
    _elm.Main.values = {_op: _op
+                      ,showTouches: showTouches
                       ,display: display
                       ,main: main};
    return _elm.Main.values;
