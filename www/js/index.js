@@ -38,6 +38,6 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var div = document.getElementById(id);
-        Elm.embed(Elm.Main, div);
+        Elm.fullscreen(Elm.Main);
     }
 };
