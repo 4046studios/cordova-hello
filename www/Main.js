@@ -26,9 +26,26 @@ Elm.Main.make = function (_elm) {
    var String = Elm.String.make(_elm);
    var Text = Elm.Text.make(_elm);
    var Time = Elm.Time.make(_elm);
+   var Window = Elm.Window.make(_elm);
    var _op = {};
-   var main = Text.asText("Hello, Cordova!");
+   var display = function (_v0) {
+      return function () {
+         switch (_v0.ctor)
+         {case "_Tuple2":
+            return A4(Graphics.Element.container,
+              _v0._0,
+              _v0._1,
+              Graphics.Element.middle,
+              Text.asText("Hello, Elm Cordova"));}
+         _E.Case($moduleName,
+         "on line 7, column 17 to 66");
+      }();
+   };
+   var main = A2(Signal._op["<~"],
+   display,
+   Window.dimensions);
    _elm.Main.values = {_op: _op
+                      ,display: display
                       ,main: main};
    return _elm.Main.values;
 };
