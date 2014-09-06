@@ -46,13 +46,19 @@ Elm.Main.make = function (_elm) {
             return A3(Graphics.Element.container,
               _v0._0,
               _v0._1,
-              Graphics.Element.middle)(Graphics.Element.flow(Graphics.Element.down)({ctor: "::"
-                                                                                    ,_0: Text.asText("Hello, Elm Cordova")
-                                                                                    ,_1: A2(List.map,
-                                                                                    showTouches,
-                                                                                    ts)}));}
+              Graphics.Element.middle)(A2(Graphics.Element.flow,
+              Graphics.Element.outward,
+              _L.fromArray([A3(Graphics.Element.image,
+                           _v0._0,
+                           _v0._1,
+                           "img/bear.jpg")
+                           ,Graphics.Element.flow(Graphics.Element.down)({ctor: "::"
+                                                                         ,_0: Text.asText("Hello, Elm Cordova")
+                                                                         ,_1: A2(List.map,
+                                                                         showTouches,
+                                                                         ts)})])));}
          _E.Case($moduleName,
-         "between lines 16 and 18");
+         "between lines 16 and 21");
       }();
    });
    var main = A2(Signal._op["~"],

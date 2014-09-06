@@ -14,8 +14,11 @@ showTouches t = flow down
 display : (Int,Int) -> [Touch] -> Element
 display (w,h) ts = 
   container w h middle <| 
-  flow down <|
-  asText "Hello, Elm Cordova" :: map showTouches ts
+  flow outward
+    [ image w h "img/bear.jpg"
+    , flow down <|
+      asText "Hello, Elm Cordova" :: map showTouches ts
+    ]
 
 main : Signal Element
 main = display <~ dimensions ~ touches
