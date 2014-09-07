@@ -34,5 +34,6 @@ sock : Signal String
 sock = connect "ws://www.wecamtoplay.com:8080/echo" msgInput.signal
 
 main : Signal Element
-main = display <~ dimensions ~ touches ~ sock
+--main = display <~ dimensions ~ touches ~ sock
+main = display <~ dimensions ~ (constant []) ~ sock
 
