@@ -16,6 +16,8 @@ Elm.Main.make = function (_elm) {
    Graphics.Collage = Elm.Graphics.Collage.make(_elm);
    var Graphics = Graphics || {};
    Graphics.Element = Elm.Graphics.Element.make(_elm);
+   var Graphics = Graphics || {};
+   Graphics.Input = Elm.Graphics.Input.make(_elm);
    var List = Elm.List.make(_elm);
    var Maybe = Elm.Maybe.make(_elm);
    var Native = Native || {};
@@ -30,7 +32,10 @@ Elm.Main.make = function (_elm) {
    var WebSocket = Elm.WebSocket.make(_elm);
    var Window = Elm.Window.make(_elm);
    var _op = {};
-   var sock = WebSocket.connect("ws://www.wecamtoplay.com:8080/echo")(Signal.constant("PING"));
+   var msgInput = Graphics.Input.input("initial");
+   var sock = A2(WebSocket.connect,
+   "ws://www.wecamtoplay.com:8080/echo",
+   msgInput.signal);
    var showTouches = function (t) {
       return A2(Graphics.Element.flow,
       Graphics.Element.down,
@@ -55,16 +60,24 @@ Elm.Main.make = function (_elm) {
                            _v0._0,
                            _v0._1,
                            "img/bear.jpg")
-                           ,Graphics.Element.flow(Graphics.Element.down)({ctor: "::"
-                                                                         ,_0: Text.asText("Hello, Elm Cordova")
-                                                                         ,_1: {ctor: "::"
-                                                                              ,_0: Text.asText(_L.append("Socket: ",
-                                                                              rcv))
-                                                                              ,_1: A2(List.map,
-                                                                              showTouches,
-                                                                              ts)}})])));}
+                           ,A2(Graphics.Element.flow,
+                           Graphics.Element.down,
+                           _L.fromArray([Text.asText("Hello, Elm Cordova")
+                                        ,A3(Graphics.Input.button,
+                                        msgInput.handle,
+                                        "Foo",
+                                        "Foo")
+                                        ,A3(Graphics.Input.button,
+                                        msgInput.handle,
+                                        "Bar",
+                                        "Bar")
+                                        ,Text.asText(_L.append("Socket: ",
+                                        rcv))
+                                        ,Graphics.Element.flow(Graphics.Element.down)(A2(List.map,
+                                        showTouches,
+                                        ts))]))])));}
          _E.Case($moduleName,
-         "between lines 17 and 24");
+         "between lines 21 and 31");
       }();
    });
    var main = A2(Signal._op["~"],
@@ -76,6 +89,7 @@ Elm.Main.make = function (_elm) {
    sock);
    _elm.Main.values = {_op: _op
                       ,showTouches: showTouches
+                      ,msgInput: msgInput
                       ,display: display
                       ,sock: sock
                       ,main: main};
