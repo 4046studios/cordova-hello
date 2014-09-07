@@ -27,8 +27,10 @@ Elm.Main.make = function (_elm) {
    var Text = Elm.Text.make(_elm);
    var Time = Elm.Time.make(_elm);
    var Touch = Elm.Touch.make(_elm);
+   var WebSocket = Elm.WebSocket.make(_elm);
    var Window = Elm.Window.make(_elm);
    var _op = {};
+   var sock = WebSocket.connect("http://www.wecamtoplay.com:8080/echo")(Signal.constant("PING"));
    var showTouches = function (t) {
       return A2(Graphics.Element.flow,
       Graphics.Element.down,
@@ -38,8 +40,9 @@ Elm.Main.make = function (_elm) {
                    ,Text.asText(_L.append("Y: ",
                    String.show(t.y)))]));
    };
-   var display = F2(function (_v0,
-   ts) {
+   var display = F3(function (_v0,
+   ts,
+   rcv) {
       return function () {
          switch (_v0.ctor)
          {case "_Tuple2":
@@ -54,21 +57,27 @@ Elm.Main.make = function (_elm) {
                            "img/bear.jpg")
                            ,Graphics.Element.flow(Graphics.Element.down)({ctor: "::"
                                                                          ,_0: Text.asText("Hello, Elm Cordova")
-                                                                         ,_1: A2(List.map,
-                                                                         showTouches,
-                                                                         ts)})])));}
+                                                                         ,_1: {ctor: "::"
+                                                                              ,_0: Text.asText(_L.append("Socket: ",
+                                                                              rcv))
+                                                                              ,_1: A2(List.map,
+                                                                              showTouches,
+                                                                              ts)}})])));}
          _E.Case($moduleName,
-         "between lines 16 and 21");
+         "between lines 17 and 24");
       }();
    });
    var main = A2(Signal._op["~"],
+   A2(Signal._op["~"],
    A2(Signal._op["<~"],
    display,
    Window.dimensions),
-   Touch.touches);
+   Touch.touches),
+   sock);
    _elm.Main.values = {_op: _op
                       ,showTouches: showTouches
                       ,display: display
+                      ,sock: sock
                       ,main: main};
    return _elm.Main.values;
 };
