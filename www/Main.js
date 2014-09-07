@@ -62,7 +62,7 @@ Elm.Main.make = function (_elm) {
                            "img/bear.jpg")
                            ,A2(Graphics.Element.flow,
                            Graphics.Element.down,
-                           _L.fromArray([Text.asText("Hello, Elm Cordova")
+                           _L.fromArray([Text.asText("Hello, Dan Cordova")
                                         ,A3(Graphics.Input.button,
                                         msgInput.handle,
                                         "Foo",

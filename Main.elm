@@ -22,7 +22,7 @@ display (w,h) ts rcv =
   flow outward
     [ image w h "img/bear.jpg"
     , flow down
-        [ asText "Hello, Elm Cordova" 
+        [ asText "Hello, Dan Cordova" 
         , button msgInput.handle "Foo" "Foo"
         , button msgInput.handle "Bar" "Bar"
         , asText ("Socket: " ++ rcv)
