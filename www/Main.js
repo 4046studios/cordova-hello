@@ -30,7 +30,7 @@ Elm.Main.make = function (_elm) {
    var WebSocket = Elm.WebSocket.make(_elm);
    var Window = Elm.Window.make(_elm);
    var _op = {};
-   var sock = WebSocket.connect("http://www.wecamtoplay.com:8080/echo")(Signal.constant("PING"));
+   var sock = WebSocket.connect("ws://www.wecamtoplay.com:8080/echo")(Signal.constant("PING"));
    var showTouches = function (t) {
       return A2(Graphics.Element.flow,
       Graphics.Element.down,

@@ -24,7 +24,7 @@ display (w,h) ts rcv =
     ]
 
 sock : Signal String
-sock = connect "http://www.wecamtoplay.com:8080/echo" <| constant "PING"
+sock = connect "ws://www.wecamtoplay.com:8080/echo" <| constant "PING"
 
 main : Signal Element
 main = display <~ dimensions ~ touches ~ sock
